@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>ethicon-poc</title>
+    <meta name="description" content="ethicon-poc" />
+  </head>
+  <body>
+    <a-scene cursor="rayOrigin: mouse; objects: .clickable">
+      <a-assets>
+        <img
+          id="groundTexture"
+          src="https://cdn.aframe.io/a-painter/images/floor.jpg"
+          crossorigin="anonymous"
+        />
+        <img
+          id="skyTexture"
+          src="https://cdn.aframe.io/a-painter/images/sky.jpg"
+          crossorigin="anonymous"
+        />
+      </a-assets>
+      
+      <a-plane
+        position="0 .1 -10"
+        rotation="0 0 0"
+        width="4"
+        height="4"
+        material="opacity: 0.75; color: #000000; roughness: 0.5; metalness: 1"
+      >
+      </a-plane>
+
+      <a-entity id="player" collider-check>
+        <a-entity
+          raycaster="objects: .collidable"
+          position="0 -0.9 0"
+          rotation="90 0 0"
+        ></a-entity>
+      </a-entity>
+      <a-entity
+        id="dialog"
+        class="collidable clickable"
+        position="0 2 -6"
+        dialog="title: This is the title; body: This is the body;"
+      >
+      </a-entity>
+
+      <!-- Background sky. -->
+      <a-sky
+        height="2048"
+        radius="30"
+        src="#skyTexture"
+        theta-length="90"
+        width="2048"
+      ></a-sky>
+
+      <!-- Ground. -->
+      <a-circle src="#groundTexture" rotation="-90 0 0" radius="32"></a-circle>
+
+      <!--Tracked controls. -->
+      <a-camera id="camera" look-controls>
+        <a-entity
+          cursor="fuse: true; fuseTimeout: 500"
+          position="-3 0 0"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: red; shader: flat"
+          raycaster="far: 20; interval: 1000; objects: .clickable"
+        ></a-entity>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
